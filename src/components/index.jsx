@@ -27,9 +27,24 @@ class App extends React.Component {
         teacher: form.teacher.value
       };
 
-    this.setState({
-      courses: this.state.courses.concat([course])
-    });
+    if (this.validateData(course) === true)
+      this.setState({
+        courses: this.state.courses.concat([course])
+      });
+
+    //form.reset();
+  }
+
+  validateData(course) {
+    if (course.name !== "" && course.teacher !== "") {
+      return true;
+    } else {
+      const errorMsg = document.getElementById("message");
+      errorMsg.innerHTML = "Los campos no pueden estar vacios!";
+      setTimeout(() => {
+        errorMsg.innerHTML = "";
+      }, 4000);
+    }
   }
 
   render() {
