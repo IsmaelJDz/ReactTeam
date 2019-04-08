@@ -1,0 +1,4 @@
+export const courses = [
+  { id: 1, name: "React desde 0", teacher: "Jonathen MirCha" },
+  { id: 2, name: "Drupal 8 desde 0", teacher: "Alberto Quiroga" }
+];

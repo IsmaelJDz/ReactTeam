@@ -1,4 +1,5 @@
 import React from "react";
+import uid from "uid";
 
 const FormAddCourses = props => (
   <form onSubmit={props.onAddCourse}>
@@ -14,7 +15,7 @@ const FormAddCourses = props => (
       placeholder="Profesor"
       name="teacher"
     />
-    <input type="hidden" name="id" value={Math.floor(Math.random() * 100)} />
+    <input type="hidden" name="id" value={uid(10)} />
     <input type="submit" className="button is-primary" value="Guardar" />
     <div id="message" />
   </form>

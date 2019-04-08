@@ -1,19 +1,21 @@
 import React from "react";
 import ListaCursos from "./listacursos";
 import FormAddCourses from "./courseAddForm";
+import { courses } from "../data/courses.json";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      courses: [
-        { id: 1, name: "React desde 0", teacher: "Jonathen MirCha" },
-        { id: 2, name: "Drupal 8 desde 0", teacher: "Alberto Quiroga" }
-      ]
+      courses: []
+      // { id: 1, name: "React desde 0", teacher: "Jonathen MirCha" },
+      // { id: 2, name: "Drupal 8 desde 0", teacher: "Alberto Quiroga" }
     };
 
     this.handleOnAddCourse = this.handleOnAddCourse.bind(this);
+    this.fetchData = this.fetchData.bind(this);
+    this.resetData = this.resetData.bind(this);
   }
 
   handleOnAddCourse(e) {
@@ -47,13 +49,41 @@ class App extends React.Component {
     }
   }
 
+  fetchData() {
+    setTimeout(() => {
+      this.setState({
+        courses: courses
+      });
+    }, 2000);
+  }
+
+  resetData() {
+    this.setState({
+      courses: []
+    });
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
   render() {
-    return (
-      <div>
-        <FormAddCourses onAddCourse={this.handleOnAddCourse} />
-        <ListaCursos courses={this.state.courses} />
-      </div>
-    );
+    if (!this.state.courses.length) {
+      return (
+        <div>
+          <p>No hay cursos :(</p>
+          <button onClick={this.fetchData}>Cargar Cursos</button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <FormAddCourses onAddCourse={this.handleOnAddCourse} />
+          <ListaCursos courses={this.state.courses} />
+          <button onClick={this.resetData}>Borrar Cursos</button>
+        </div>
+      );
+    }
   }
 }
 
